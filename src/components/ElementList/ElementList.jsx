@@ -11,7 +11,7 @@ const ElementList = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    
+
     dispatch(contactsOperations.fetchContacts(), { signal: controller.signal });
     return () => {
       controller.abort();
