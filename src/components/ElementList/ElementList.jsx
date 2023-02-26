@@ -1,5 +1,5 @@
-import React from 'react';
-import { deleteContact } from 'redux/contactsSlice';
+import React, { useEffect } from 'react';
+import * as contactsOperations from '../../redux/contactsOperations';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selector';
 import { BtnList, Element } from './ElementList.styled';
@@ -9,24 +9,34 @@ const ElementList = () => {
   const contacts = useSelector(getContacts);
   const contactsFilter = useSelector(getFilter);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    
+    dispatch(contactsOperations.fetchContacts(), { signal: controller.signal });
+    return () => {
+      controller.abort();
+    };
+  }, [dispatch]);
+
   const findContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(contactsFilter.toLowerCase())
   );
 
   return (
     <>
-      {findContacts.map(({ name, number, id }) => (
-        <Element key={id}>
-          {name}: {number}
-          <BtnList
-            onClick={() => {
-              dispatch(deleteContact(id));
-            }}
-          >
-            Delete
-          </BtnList>
-        </Element>
-      ))}
+      {findContacts.length > 0 &&
+        findContacts.map(({ name, number, id }) => (
+          <Element key={id}>
+            {name}: {number}
+            <BtnList
+              onClick={() => {
+                dispatch(contactsOperations.deleteContact(id));
+              }}
+            >
+              Delete
+            </BtnList>
+          </Element>
+        ))}
     </>
   );
 };

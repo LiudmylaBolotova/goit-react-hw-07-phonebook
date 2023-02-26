@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import * as contactsOperations from '../../redux/contactsOperations';
 import { getContacts } from 'redux/selector';
 import { BtnForm, Form, InputForm, TitleForm } from './ContactForm.styled';
 
@@ -18,10 +18,14 @@ export function ContactForm() {
         contact => contact.name.toLowerCase() === name.toLowerCase()
       )
     ) {
-      return alert('Enter your request!');
+      return alert(`${name} is already on the list!`);
     }
+
+    if (!name && !number) {
+      return alert('Enter name and number!');
+    }
+    dispatch(contactsOperations.addContact({ name, number }));
     form.reset();
-    dispatch(addContact({ name, number }));
   };
 
   return (
@@ -32,9 +36,9 @@ export function ContactForm() {
           <InputForm
             type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
+            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            // required
           />
         </label>
         <TitleForm>Number</TitleForm>
@@ -42,9 +46,9 @@ export function ContactForm() {
           <InputForm
             type="tel"
             name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
+            // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            // required
           />
         </label>
         <BtnForm type="submit">Add contact</BtnForm>

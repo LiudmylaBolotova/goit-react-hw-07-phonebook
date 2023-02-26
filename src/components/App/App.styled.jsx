@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
 
   font-size: ${p => p.theme.fontSizes[1]}px;
-  width: ${p => p.theme.sizes.width[5]}px;
+  width: ${p => p.theme.sizes.width[6]}px;
   margin: auto;
 
   color: ${p => p.theme.colors.text};

@@ -9,7 +9,7 @@ export const theme = {
   },
 
   sizes: {
-    width: [70, 120, 160, 260, 380, 650],
+    width: [70, 120, 160, 260, 380, 450, 650],
     height: [40, 60, 150, 300],
   },
 
@@ -23,6 +23,7 @@ export const theme = {
   space: [0, 2, 4, 8, 16, 32, 64, 128, 230],
 
   borders: {
+    superSmall: '1px skyblue solid',
     small: '2px skyblue solid',
     normal: '4px skyblue solid',
   },

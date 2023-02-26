@@ -25,7 +25,11 @@ export const BtnList = styled.button`
 export const Element = styled.li`
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding-bottom: ${p => p.theme.space[4]}px;
+  justify-content: space-between;
+
+  border: ${p => p.theme.borders.superSmall};
+  padding: ${p => p.theme.space[2]}px;
+  margin-top: ${p => p.theme.space[2]}px;
+  background-color: ${p => p.theme.colors.backgroundColor};
+  border-radius: ${p => p.theme.radii.round}px;
 `;
