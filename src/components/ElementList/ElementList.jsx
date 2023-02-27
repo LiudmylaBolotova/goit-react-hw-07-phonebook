@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import * as contactsOperations from '../../redux/contactsOperations';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selector';
-import { BtnList, Element } from './ElementList.styled';
+import { BtnList, Element, ElementString } from './ElementList.styled';
 
 const ElementList = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const ElementList = () => {
 
   return (
     <>
-      {findContacts.length > 0 &&
+      {findContacts.length > 0 ? (
         findContacts.map(({ name, number, id }) => (
           <Element key={id}>
             {name}: {number}
@@ -36,7 +36,12 @@ const ElementList = () => {
               Delete
             </BtnList>
           </Element>
-        ))}
+        ))
+      ) : (
+        <ElementString>
+          <p>Your contacts will be displayed here</p>
+        </ElementString>
+      )}
     </>
   );
 };

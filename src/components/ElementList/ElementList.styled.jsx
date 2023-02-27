@@ -33,3 +33,9 @@ export const Element = styled.li`
   background-color: ${p => p.theme.colors.backgroundColor};
   border-radius: ${p => p.theme.radii.round}px;
 `;
+
+export const ElementString = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
